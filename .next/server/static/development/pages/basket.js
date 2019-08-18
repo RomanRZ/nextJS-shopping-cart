@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -153,7 +153,12 @@ const selectProduct = product => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _BasketItem_BasketItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasketItem/BasketItem */ "./app/components/Basket/BasketItem/BasketItem.js");
+/* harmony import */ var _Basket_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Basket.scss */ "./app/components/Basket/Basket.scss");
+/* harmony import */ var _Basket_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Basket_scss__WEBPACK_IMPORTED_MODULE_2__);
 var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Basket\\Basket.js";
+
+
 
 
 const Basket = ({
@@ -169,7 +174,7 @@ const Basket = ({
     className: "basket",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
+      lineNumber: 11
     },
     __self: undefined
   }, basket.map(({
@@ -179,71 +184,43 @@ const Basket = ({
     id,
     quantity
   }) => {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BasketItem_BasketItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: id,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 12
-      },
-      __self: undefined
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 13
-      },
-      __self: undefined
-    }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      title: title,
+      description: description,
+      price: price,
+      id: id,
+      quantity: quantity,
+      subtractProductHandler: subtractProductHandler,
+      incrementProductHandler: incrementProductHandler,
+      deleteProductHandler: deleteProductHandler,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 14
       },
       __self: undefined
-    }, description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 15
-      },
-      __self: undefined
-    }, "Price: ", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 16
-      },
-      __self: undefined
-    }, "Quantity: ", quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: () => subtractProductHandler(id),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 17
-      },
-      __self: undefined
-    }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: () => {
-        incrementProductHandler(id);
-      },
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 18
-      },
-      __self: undefined
-    }, "+"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-      onClick: () => deleteProductHandler(id),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 25
-      },
-      __self: undefined
-    }, "Delete product"));
+    });
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 27
     },
     __self: undefined
   }, "Total amount:", totalAmount));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Basket);
+
+/***/ }),
+
+/***/ "./app/components/Basket/Basket.scss":
+/*!*******************************************!*\
+  !*** ./app/components/Basket/Basket.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
@@ -326,6 +303,112 @@ const mapDispatchToProps = dispatch => {
 
 /***/ }),
 
+/***/ "./app/components/Basket/BasketItem/BasketItem.js":
+/*!********************************************************!*\
+  !*** ./app/components/Basket/BasketItem/BasketItem.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _BasketItem_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BasketItem.scss */ "./app/components/Basket/BasketItem/BasketItem.scss");
+/* harmony import */ var _BasketItem_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_BasketItem_scss__WEBPACK_IMPORTED_MODULE_1__);
+var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Basket\\BasketItem\\BasketItem.js";
+
+
+
+const BasketItem = ({
+  title,
+  quantity,
+  description,
+  price,
+  id,
+  subtractProductHandler,
+  incrementProductHandler,
+  deleteProductHandler
+}) => {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "basket-item",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "basket-item__title",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: undefined
+  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "basket-item__description",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: undefined
+  }, description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "basket-item__price",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: undefined
+  }, "Price: ", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    className: "basket-item__quantity",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 19
+    },
+    __self: undefined
+  }, "Quantity: ", quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "basket-item__btn btn basket-item__btn--quantity",
+    onClick: () => subtractProductHandler(id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: undefined
+  }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "basket-item__btn btn basket-item__btn--quantity",
+    onClick: () => {
+      incrementProductHandler(id);
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: undefined
+  }, "+"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "basket-item__btn btn",
+    onClick: () => deleteProductHandler(id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 31
+    },
+    __self: undefined
+  }, "Delete product"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BasketItem);
+
+/***/ }),
+
+/***/ "./app/components/Basket/BasketItem/BasketItem.scss":
+/*!**********************************************************!*\
+  !*** ./app/components/Basket/BasketItem/BasketItem.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
 /***/ "./app/components/Navbar/Navbar.js":
 /*!*****************************************!*\
   !*** ./app/components/Navbar/Navbar.js ***!
@@ -339,65 +422,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Navbar_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navbar.scss */ "./app/components/Navbar/Navbar.scss");
+/* harmony import */ var _Navbar_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Navbar_scss__WEBPACK_IMPORTED_MODULE_2__);
 var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Navbar\\Navbar.js";
+
 
 
 
 const Navbar = () => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6
-    },
-    __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "nav",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 7
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+    className: "nav__list",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8
+    },
+    __self: undefined
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav__item",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 9
-    },
-    __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-    __source: {
-      fileName: _jsxFileName,
       lineNumber: 10
     },
     __self: undefined
-  }, "Products"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "nav__link",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 11
+    },
+    __self: undefined
+  }, "Products"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav__item",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/basket",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 15
     },
     __self: undefined
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "nav__link",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 16
     },
     __self: undefined
   }, "Basket")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Navbar);
+
+/***/ }),
+
+/***/ "./app/components/Navbar/Navbar.scss":
+/*!*******************************************!*\
+  !*** ./app/components/Navbar/Navbar.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
@@ -1153,7 +1256,7 @@ const basket = () => react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!*******************************!*\
   !*** multi ./pages/basket.js ***!
   \*******************************/

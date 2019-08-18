@@ -1,0 +1,20 @@
+.nav {
+  background: #3a66a0;
+  color: #fff;
+
+  &__list {
+    display: flex;
+    padding: 15px;
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  &__link {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px;
+  }
+}

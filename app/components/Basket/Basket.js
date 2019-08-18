@@ -1,4 +1,6 @@
 import React from 'react';
+import BasketItem from './BasketItem/BasketItem';
+import './Basket.scss';
 
 const Basket = ({ basket, incrementProductHandler, subtractProductHandler, deleteProductHandler }) => {
   const totalAmount = basket.reduce((amount, product) => {
@@ -9,21 +11,17 @@ const Basket = ({ basket, incrementProductHandler, subtractProductHandler, delet
     <div className='basket'>
       {basket.map(({ title, description, price, id, quantity }) => {
         return (
-          <div key={id}>
-            <h3>{title}</h3>
-            <div>{description}</div>
-            <h4>Price: {price}</h4>
-            <h4>Quantity: {quantity}</h4>
-            <button onClick={() => subtractProductHandler(id)}>-</button>
-            <button
-              onClick={() => {
-                incrementProductHandler(id);
-              }}
-            >
-              +
-            </button>
-            <button onClick={() => deleteProductHandler(id)}>Delete product</button>
-          </div>
+          <BasketItem
+            key={id}
+            title={title}
+            description={description}
+            price={price}
+            id={id}
+            quantity={quantity}
+            subtractProductHandler={subtractProductHandler}
+            incrementProductHandler={incrementProductHandler}
+            deleteProductHandler={deleteProductHandler}
+          />
         );
       })}
       <div>Total amount:{totalAmount}</div>

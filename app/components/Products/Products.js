@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
+import Product from './Product/Product';
+import '../../styles/styles.scss';
 
 const Products = ({ products, addProductHandler, selectProductHandler }) => {
   return (
@@ -7,15 +8,11 @@ const Products = ({ products, addProductHandler, selectProductHandler }) => {
       {products.map(product => {
         const { title, description, price, id } = product;
         return (
-          <div onClick={() => selectProductHandler(product)} className='product' key={id}>
-            <Link href='/selectedProduct'>
-              <div>
-                <h3>{title}</h3>
-                <div>{description}</div>
-                <h4>Price: {price}</h4>
-              </div>
-            </Link>
-            <button onClick={() => addProductHandler(product)}>Add product</button>
+          <div onClick={() => selectProductHandler(product)} className='products__item' key={id}>
+            <Product title={title} description={description} price={price} />
+            <button className='products__btn btn' onClick={() => addProductHandler(product)}>
+              Add product
+            </button>
           </div>
         );
       })}

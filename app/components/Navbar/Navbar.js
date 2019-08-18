@@ -1,18 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
+import './Navbar.scss';
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
-        <li>
+    <nav className='nav'>
+      <ul className='nav__list'>
+        <li className='nav__item'>
           <Link href='/'>
-            <a>Products</a>
+            <a className='nav__link'>Products</a>
           </Link>
         </li>
-        <li>
+        <li className='nav__item'>
           <Link href='/basket'>
-            <a>Basket</a>
+            <a className='nav__link'>Basket</a>
           </Link>
         </li>
       </ul>

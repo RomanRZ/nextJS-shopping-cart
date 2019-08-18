@@ -1,10 +1,10 @@
 import Navbar from '../app/components/Navbar/Navbar';
-import ProductContainer from '../app/components/Product/ProductContainer';
+import SingleProductContainer from '../app/components/SingleProduct/SingleProductContainer';
 
 const selectedProduct = () => (
   <>
     <Navbar />
-    <ProductContainer />
+    <SingleProductContainer />
   </>
 );
 

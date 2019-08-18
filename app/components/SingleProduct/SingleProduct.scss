@@ -1,0 +1,17 @@
+.single-product {
+  padding: 25px 15px;
+
+  &__description {
+    padding: 5px 0;
+  }
+
+  &__price {
+    margin-bottom: 10px;
+  }
+
+  &__btn {
+    color: #fff;
+    background: #5ac18e;
+    font-weight: bold;
+  }
+}

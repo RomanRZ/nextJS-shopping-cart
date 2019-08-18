@@ -1,0 +1,22 @@
+.basket-item {
+  padding: 10px 0;
+
+  &__description {
+    padding: 5px 0;
+  }
+
+  &__quantity {
+    padding: 5px 0;
+  }
+
+  &__btn {
+    color: #fff;
+    background: #5ac18e;
+    font-weight: bold;
+    margin-right: 10px;
+
+    &--quantity {
+      padding: 5px 20px;
+    }
+  }
+}

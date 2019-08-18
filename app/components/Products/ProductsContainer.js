@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Products from '../Products/Products';
 import { addProduct, selectProduct } from '../../actions/actions';
+import './Products.scss';
 
 class ProductsContainer extends Component {
   addProductHandler = product => {
