@@ -110,7 +110,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 const addProduct = product => {
-  product.quantity = 1;
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["ADD_PRODUCT"],
     payload: product
@@ -128,16 +127,16 @@ const subtractProduct = id => {
     payload: id
   };
 };
-const deleteProduct = product => {
+const deleteProduct = id => {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_PRODUCT"],
-    payload: product
+    payload: id
   };
 };
-const selectProduct = id => {
+const selectProduct = product => {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["SELECT_PRODUCT"],
-    payload: id
+    payload: product
   };
 };
 
@@ -229,14 +228,16 @@ const Navbar = () => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _sharedUI_AddBtn_AddBtn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sharedUI/AddBtn/AddBtn */ "./app/components/sharedUI/AddBtn/AddBtn.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Products\\Products.js";
 
 
 
 const Products = ({
   products,
-  addProductHandler
+  addProductHandler,
+  selectProductHandler
 }) => {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "products",
@@ -253,39 +254,53 @@ const Products = ({
       id
     } = product;
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: () => selectProductHandler(product),
+      className: "product",
       key: id,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 10
       },
       __self: undefined
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      href: "/selectedProduct",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 11
       },
       __self: undefined
-    }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 12
       },
       __self: undefined
-    }, description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 13
       },
       __self: undefined
-    }, "Price: ", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_sharedUI_AddBtn_AddBtn__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      product: product,
-      addProductHandler: addProductHandler,
+    }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 14
       },
       __self: undefined
-    }));
+    }, description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 15
+      },
+      __self: undefined
+    }, "Price: ", price))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: () => addProductHandler(product),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 18
+      },
+      __self: undefined
+    }, "Add product"));
   }));
 };
 
@@ -302,13 +317,15 @@ const Products = ({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Products_Products__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Products/Products */ "./app/components/Products/Products.js");
-/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/actions */ "./app/actions/actions.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "react-redux");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Products_Products__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Products/Products */ "./app/components/Products/Products.js");
+/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/actions */ "./app/actions/actions.js");
+
 
 var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Products\\ProductsContainer.js";
 
@@ -316,12 +333,20 @@ var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\c
 
 
 
-class ProductsContainer extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] {
+class ProductsContainer extends react__WEBPACK_IMPORTED_MODULE_2__["Component"] {
   constructor(...args) {
     super(...args);
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "addProductHandler", product => {
-      this.props.addProduct(product);
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "addProductHandler", product => {
+      const newProduct = Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, product, {
+        quantity: 1
+      });
+
+      this.props.addProduct(newProduct);
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(this, "selectProductHandler", product => {
+      this.props.selectProduct(product);
     });
   }
 
@@ -329,12 +354,13 @@ class ProductsContainer extends react__WEBPACK_IMPORTED_MODULE_1__["Component"] 
     const {
       products
     } = this.props;
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Products_Products__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Products_Products__WEBPACK_IMPORTED_MODULE_4__["default"], {
       products: products,
       addProductHandler: this.addProductHandler,
+      selectProductHandler: this.selectProductHandler,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 19
       },
       __self: this
     });
@@ -352,43 +378,12 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addProduct: id => dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_4__["addProduct"])(id))
+    addProduct: product => dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_5__["addProduct"])(product)),
+    selectProduct: id => dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_5__["selectProduct"])(id))
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps, mapDispatchToProps)(ProductsContainer));
-
-/***/ }),
-
-/***/ "./app/components/sharedUI/AddBtn/AddBtn.js":
-/*!**************************************************!*\
-  !*** ./app/components/sharedUI/AddBtn/AddBtn.js ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\sharedUI\\AddBtn\\AddBtn.js";
-
-
-const AddBtn = ({
-  addProductHandler,
-  product
-}) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: () => addProductHandler(product),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 4
-    },
-    __self: undefined
-  }, "Add product");
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (AddBtn);
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_3__["connect"])(mapStateToProps, mapDispatchToProps)(ProductsContainer));
 
 /***/ }),
 
@@ -458,6 +453,28 @@ module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-prope
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/get-own-property-symbols */ "core-js/library/fn/object/get-own-property-symbols");
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/object/keys */ "core-js/library/fn/object/keys");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
@@ -484,6 +501,49 @@ function _defineProperty(obj, key, value) {
   }
 
   return obj;
+}
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+
+
+
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
+
+    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
+      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
+        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
+    });
+  }
+
+  return target;
 }
 
 /***/ }),
@@ -1121,43 +1181,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _app_components_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app/components/Navbar/Navbar */ "./app/components/Navbar/Navbar.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "react-redux");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _app_components_Products_ProductsContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/components/Products/ProductsContainer */ "./app/components/Products/ProductsContainer.js");
+/* harmony import */ var _app_components_Products_ProductsContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app/components/Products/ProductsContainer */ "./app/components/Products/ProductsContainer.js");
 var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\pages\\index.js";
 
 
- // import { startClock, serverRenderClock } from '../store';
-
 
 class index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  // static getInitialProps ({ reduxStore, req }) {
-  //   const isServer = !!req
-  //   // DISPATCH ACTIONS HERE ONLY WITH `reduxStore.dispatch`
-  //   reduxStore.dispatch(serverRenderClock(isServer))
-  //   return {}
-  // }
   render() {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_components_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 9
       },
       __self: this
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_components_Products_ProductsContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_components_Products_ProductsContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 21
+        lineNumber: 10
       },
       __self: this
     }), ";");
   }
 
-} // const mapDispatchToProps = { startClock };
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(Index);
+}
 
 /***/ }),
 
@@ -1214,6 +1260,28 @@ module.exports = require("core-js/library/fn/object/define-property");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/get-own-property-descriptor");
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/get-own-property-symbols":
+/*!*********************************************************************!*\
+  !*** external "core-js/library/fn/object/get-own-property-symbols" ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/get-own-property-symbols");
+
+/***/ }),
+
+/***/ "core-js/library/fn/object/keys":
+/*!*************************************************!*\
+  !*** external "core-js/library/fn/object/keys" ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("core-js/library/fn/object/keys");
 
 /***/ }),
 

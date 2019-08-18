@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Basket from './Basket';
-import { incrementProduct, subtractProduct } from '../../actions/actions';
+import { incrementProduct, subtractProduct, deleteProduct } from '../../actions/actions';
 
 class BasketContainer extends Component {
   incrementProductHandler = id => {
@@ -9,6 +9,9 @@ class BasketContainer extends Component {
   };
   subtractProductHandler = id => {
     this.props.subtractProduct(id);
+  };
+  deleteProductHandler = id => {
+    this.props.deleteProduct(id);
   };
 
   render() {
@@ -18,6 +21,7 @@ class BasketContainer extends Component {
         basket={basket}
         incrementProductHandler={this.incrementProductHandler}
         subtractProductHandler={this.subtractProductHandler}
+        deleteProductHandler={this.deleteProductHandler}
       />
     );
   }
@@ -31,12 +35,9 @@ const mapStateToProps = ({ basket }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    incrementProduct: id => {
-      dispatch(incrementProduct(id));
-    },
-    subtractProduct: id => {
-      dispatch(subtractProduct(id));
-    }
+    incrementProduct: id => dispatch(incrementProduct(id)),
+    subtractProduct: id => dispatch(subtractProduct(id)),
+    deleteProduct: id => dispatch(deleteProduct(id))
   };
 };
 

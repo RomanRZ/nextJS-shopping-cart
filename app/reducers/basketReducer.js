@@ -1,8 +1,6 @@
-import * as actions from '../actions/actions';
 import * as t from '../types/types';
-const initialState = [];
 
-const basketReducer = (state = initialState, action) => {
+const basketReducer = (state = [], action) => {
   switch (action.type) {
     case t.ADD_PRODUCT:
       const found = state.find(product => product.id === action.payload.id);
@@ -26,6 +24,8 @@ const basketReducer = (state = initialState, action) => {
         return product;
       });
       return refreshedState;
+    case t.DELETE_PRODUCT:
+      return state.filter(product => product.id !== action.payload);
     default:
       return state;
   }

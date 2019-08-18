@@ -17,7 +17,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 var addProduct = function addProduct(product) {
-  product.quantity = 1;
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["ADD_PRODUCT"],
     payload: product
@@ -35,16 +34,16 @@ var subtractProduct = function subtractProduct(id) {
     payload: id
   };
 };
-var deleteProduct = function deleteProduct(product) {
+var deleteProduct = function deleteProduct(id) {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_PRODUCT"],
-    payload: product
+    payload: id
   };
 };
-var selectProduct = function selectProduct(id) {
+var selectProduct = function selectProduct(product) {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["SELECT_PRODUCT"],
-    payload: id
+    payload: product
   };
 };
 
@@ -61,20 +60,17 @@ var selectProduct = function selectProduct(id) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/toConsumableArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js");
-/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/actions */ "./app/actions/actions.js");
-/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
+/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 
 
-
-var initialState = [];
 
 var basketReducer = function basketReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _types_types__WEBPACK_IMPORTED_MODULE_3__["ADD_PRODUCT"]:
+    case _types_types__WEBPACK_IMPORTED_MODULE_2__["ADD_PRODUCT"]:
       var found = state.find(function (product) {
         return product.id === action.payload.id;
       });
@@ -85,7 +81,7 @@ var basketReducer = function basketReducer() {
 
       return [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])(state), [action.payload]);
 
-    case _types_types__WEBPACK_IMPORTED_MODULE_3__["INCREMENT_PRODUCT"]:
+    case _types_types__WEBPACK_IMPORTED_MODULE_2__["INCREMENT_PRODUCT"]:
       var newState = state.map(function (product) {
         if (product.id === action.payload) {
           return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, product, {
@@ -97,7 +93,7 @@ var basketReducer = function basketReducer() {
       });
       return newState;
 
-    case _types_types__WEBPACK_IMPORTED_MODULE_3__["SUBTRACT_PRODUCT"]:
+    case _types_types__WEBPACK_IMPORTED_MODULE_2__["SUBTRACT_PRODUCT"]:
       var refreshedState = state.map(function (product) {
         if (product.id === action.payload) {
           return product.quantity ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, product, {
@@ -108,6 +104,11 @@ var basketReducer = function basketReducer() {
         return product;
       });
       return refreshedState;
+
+    case _types_types__WEBPACK_IMPORTED_MODULE_2__["DELETE_PRODUCT"]:
+      return state.filter(function (product) {
+        return product.id !== action.payload;
+      });
 
     default:
       return state;
@@ -211,19 +212,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 
-var initialState = {}; // const initialState = {
-//   title: 'Product 2',
-//   description:
-//     'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-//   price: '128',
-//   id: '15'
-// };
 
 var selectProductReducer = function selectProductReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
+    case _types_types__WEBPACK_IMPORTED_MODULE_1__["SELECT_PRODUCT"]:
+      return action.payload;
+
     default:
       return state;
   }
@@ -316,11 +313,9 @@ var isServer = "object" === 'undefined';
 var __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
 function getOrCreateStore(initialState) {
-  // Always make a new store if server, otherwise state is shared between requests
   if (isServer) {
     return Object(_app_store_store__WEBPACK_IMPORTED_MODULE_10__["initializeStore"])(initialState);
-  } // Create store if unavailable on the client and set it on the window object
-
+  }
 
   if (!window[__NEXT_REDUX_STORE__]) {
     window[__NEXT_REDUX_STORE__] = Object(_app_store_store__WEBPACK_IMPORTED_MODULE_10__["initializeStore"])(initialState);
@@ -346,10 +341,7 @@ function getOrCreateStore(initialState) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    // Get or Create the store with `undefined` as initialState
-                    // This allows you to set a custom default initialState
-                    reduxStore = getOrCreateStore(); // Provide the store to getInitialProps of pages
-
+                    reduxStore = getOrCreateStore();
                     appContext.ctx.reduxStore = reduxStore;
                     appProps = {};
 
@@ -402,7 +394,7 @@ function getOrCreateStore(initialState) {
             reduxStore: this.reduxStore,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 47
+              lineNumber: 42
             },
             __self: this
           }));

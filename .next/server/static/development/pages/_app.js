@@ -110,7 +110,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 const addProduct = product => {
-  product.quantity = 1;
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["ADD_PRODUCT"],
     payload: product
@@ -128,16 +127,16 @@ const subtractProduct = id => {
     payload: id
   };
 };
-const deleteProduct = product => {
+const deleteProduct = id => {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_PRODUCT"],
-    payload: product
+    payload: id
   };
 };
-const selectProduct = id => {
+const selectProduct = product => {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["SELECT_PRODUCT"],
-    payload: id
+    payload: product
   };
 };
 
@@ -153,16 +152,13 @@ const selectProduct = id => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
-/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/actions */ "./app/actions/actions.js");
-/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
+/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 
 
-const initialState = [];
-
-const basketReducer = (state = initialState, action) => {
+const basketReducer = (state = [], action) => {
   switch (action.type) {
-    case _types_types__WEBPACK_IMPORTED_MODULE_2__["ADD_PRODUCT"]:
+    case _types_types__WEBPACK_IMPORTED_MODULE_1__["ADD_PRODUCT"]:
       const found = state.find(product => product.id === action.payload.id);
 
       if (found) {
@@ -171,7 +167,7 @@ const basketReducer = (state = initialState, action) => {
 
       return [...state, action.payload];
 
-    case _types_types__WEBPACK_IMPORTED_MODULE_2__["INCREMENT_PRODUCT"]:
+    case _types_types__WEBPACK_IMPORTED_MODULE_1__["INCREMENT_PRODUCT"]:
       const newState = state.map(product => {
         if (product.id === action.payload) {
           return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, product, {
@@ -183,7 +179,7 @@ const basketReducer = (state = initialState, action) => {
       });
       return newState;
 
-    case _types_types__WEBPACK_IMPORTED_MODULE_2__["SUBTRACT_PRODUCT"]:
+    case _types_types__WEBPACK_IMPORTED_MODULE_1__["SUBTRACT_PRODUCT"]:
       const refreshedState = state.map(product => {
         if (product.id === action.payload) {
           return product.quantity ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, product, {
@@ -194,6 +190,9 @@ const basketReducer = (state = initialState, action) => {
         return product;
       });
       return refreshedState;
+
+    case _types_types__WEBPACK_IMPORTED_MODULE_1__["DELETE_PRODUCT"]:
+      return state.filter(product => product.id !== action.payload);
 
     default:
       return state;
@@ -295,16 +294,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 
-const initialState = {}; // const initialState = {
-//   title: 'Product 2',
-//   description:
-//     'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-//   price: '128',
-//   id: '15'
-// };
 
-const selectProductReducer = (state = initialState, action) => {
+const selectProductReducer = (state = {}, action) => {
   switch (action.type) {
+    case _types_types__WEBPACK_IMPORTED_MODULE_1__["SELECT_PRODUCT"]:
+      return action.payload;
+
     default:
       return state;
   }
@@ -383,11 +378,9 @@ const isServer = "undefined" === 'undefined';
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
 function getOrCreateStore(initialState) {
-  // Always make a new store if server, otherwise state is shared between requests
   if (isServer) {
     return Object(_app_store_store__WEBPACK_IMPORTED_MODULE_3__["initializeStore"])(initialState);
-  } // Create store if unavailable on the client and set it on the window object
-
+  }
 
   if (!window[__NEXT_REDUX_STORE__]) {
     window[__NEXT_REDUX_STORE__] = Object(_app_store_store__WEBPACK_IMPORTED_MODULE_3__["initializeStore"])(initialState);
@@ -399,10 +392,7 @@ function getOrCreateStore(initialState) {
 /* harmony default export */ __webpack_exports__["default"] = (App => {
   return class AppWithRedux extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Component {
     static async getInitialProps(appContext) {
-      // Get or Create the store with `undefined` as initialState
-      // This allows you to set a custom default initialState
-      const reduxStore = getOrCreateStore(); // Provide the store to getInitialProps of pages
-
+      const reduxStore = getOrCreateStore();
       appContext.ctx.reduxStore = reduxStore;
       let appProps = {};
 
@@ -425,7 +415,7 @@ function getOrCreateStore(initialState) {
         reduxStore: this.reduxStore,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 47
+          lineNumber: 42
         },
         __self: this
       }));

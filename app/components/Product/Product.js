@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const Product = ({ currentProduct: { title, description, price } }) => {
+const Product = ({ selectedProduct, selectedProduct: { title, description, price }, addProductHandler }) => {
   return (
     <div>
-      <h3>Product title: {title}</h3>
+      <h3>{title}</h3>
       <div>{description}</div>
-      <h4>{price}</h4>
+      <h4>Price: {price}</h4>
+      <button onClick={() => addProductHandler(selectedProduct)}>Add product</button>
     </div>
   );
 };

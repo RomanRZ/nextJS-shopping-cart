@@ -1,17 +1,21 @@
-import React, { Component } from 'react';
-import AddBtn from '../sharedUI/AddBtn/AddBtn';
+import React from 'react';
+import Link from 'next/link';
 
-const Products = ({ products, addProductHandler }) => {
+const Products = ({ products, addProductHandler, selectProductHandler }) => {
   return (
     <div className='products'>
       {products.map(product => {
         const { title, description, price, id } = product;
         return (
-          <div key={id}>
-            <h3>{title}</h3>
-            <div>{description}</div>
-            <h4>Price: {price}</h4>
-            <AddBtn product={product} addProductHandler={addProductHandler} />
+          <div onClick={() => selectProductHandler(product)} className='product' key={id}>
+            <Link href='/selectedProduct'>
+              <div>
+                <h3>{title}</h3>
+                <div>{description}</div>
+                <h4>Price: {price}</h4>
+              </div>
+            </Link>
+            <button onClick={() => addProductHandler(product)}>Add product</button>
           </div>
         );
       })}

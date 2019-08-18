@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Basket = ({ basket, incrementProductHandler, subtractProductHandler }) => {
+const Basket = ({ basket, incrementProductHandler, subtractProductHandler, deleteProductHandler }) => {
   const totalAmount = basket.reduce((amount, product) => {
     return amount + product.price * product.quantity;
   }, 0);
@@ -8,7 +8,6 @@ const Basket = ({ basket, incrementProductHandler, subtractProductHandler }) => 
   return (
     <div className='basket'>
       {basket.map(({ title, description, price, id, quantity }) => {
-        console.log(id);
         return (
           <div key={id}>
             <h3>{title}</h3>
@@ -23,7 +22,7 @@ const Basket = ({ basket, incrementProductHandler, subtractProductHandler }) => 
             >
               +
             </button>
-            <button>Delete product</button>
+            <button onClick={() => deleteProductHandler(id)}>Delete product</button>
           </div>
         );
       })}

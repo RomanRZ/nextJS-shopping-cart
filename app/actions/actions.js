@@ -1,7 +1,6 @@
 import * as t from '../types/types';
 
 export const addProduct = product => {
-  product.quantity = 1;
   return {
     type: t.ADD_PRODUCT,
     payload: product
@@ -19,15 +18,15 @@ export const subtractProduct = id => {
     payload: id
   };
 };
-export const deleteProduct = product => {
+export const deleteProduct = id => {
   return {
     type: t.DELETE_PRODUCT,
-    payload: product
+    payload: id
   };
 };
-export const selectProduct = id => {
+export const selectProduct = product => {
   return {
     type: t.SELECT_PRODUCT,
-    payload: id
+    payload: product
   };
 };

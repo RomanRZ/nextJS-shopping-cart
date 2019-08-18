@@ -17,7 +17,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 var addProduct = function addProduct(product) {
-  product.quantity = 1;
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["ADD_PRODUCT"],
     payload: product
@@ -35,16 +34,16 @@ var subtractProduct = function subtractProduct(id) {
     payload: id
   };
 };
-var deleteProduct = function deleteProduct(product) {
+var deleteProduct = function deleteProduct(id) {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["DELETE_PRODUCT"],
-    payload: product
+    payload: id
   };
 };
-var selectProduct = function selectProduct(id) {
+var selectProduct = function selectProduct(product) {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["SELECT_PRODUCT"],
-    payload: id
+    payload: product
   };
 };
 
@@ -67,7 +66,8 @@ var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\c
 var Basket = function Basket(_ref) {
   var basket = _ref.basket,
       incrementProductHandler = _ref.incrementProductHandler,
-      subtractProductHandler = _ref.subtractProductHandler;
+      subtractProductHandler = _ref.subtractProductHandler,
+      deleteProductHandler = _ref.deleteProductHandler;
   var totalAmount = basket.reduce(function (amount, product) {
     return amount + product.price * product.quantity;
   }, 0);
@@ -84,36 +84,35 @@ var Basket = function Basket(_ref) {
         price = _ref2.price,
         id = _ref2.id,
         quantity = _ref2.quantity;
-    console.log(id);
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 12
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 13
       },
       __self: this
     }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 15
+        lineNumber: 14
       },
       __self: this
     }, description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 16
+        lineNumber: 15
       },
       __self: this
     }, "Price: ", price), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 16
       },
       __self: this
     }, "Quantity: ", quantity), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -122,7 +121,7 @@ var Basket = function Basket(_ref) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 17
       },
       __self: this
     }, "-"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -131,20 +130,23 @@ var Basket = function Basket(_ref) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 18
       },
       __self: this
     }, "+"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: function onClick() {
+        return deleteProductHandler(id);
+      },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26
+        lineNumber: 25
       },
       __self: this
     }, "Delete product"));
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 29
     },
     __self: this
   }, "Total amount:", totalAmount));
@@ -214,6 +216,10 @@ function (_Component) {
       _this.props.subtractProduct(id);
     });
 
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "deleteProductHandler", function (id) {
+      _this.props.deleteProduct(id);
+    });
+
     return _this;
   }
 
@@ -225,9 +231,10 @@ function (_Component) {
         basket: basket,
         incrementProductHandler: this.incrementProductHandler,
         subtractProductHandler: this.subtractProductHandler,
+        deleteProductHandler: this.deleteProductHandler,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17
+          lineNumber: 20
         },
         __self: this
       });
@@ -247,10 +254,13 @@ var mapStateToProps = function mapStateToProps(_ref) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     incrementProduct: function incrementProduct(id) {
-      dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_10__["incrementProduct"])(id));
+      return dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_10__["incrementProduct"])(id));
     },
     subtractProduct: function subtractProduct(id) {
-      dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_10__["subtractProduct"])(id));
+      return dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_10__["subtractProduct"])(id));
+    },
+    deleteProduct: function deleteProduct(id) {
+      return dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_10__["deleteProduct"])(id));
     }
   };
 };

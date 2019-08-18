@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Products from '../Products/Products';
-import { addProduct } from '../../actions/actions';
+import { addProduct, selectProduct } from '../../actions/actions';
 
 class ProductsContainer extends Component {
   addProductHandler = product => {
-    this.props.addProduct(product);
+    const newProduct = { ...product, quantity: 1 };
+    this.props.addProduct(newProduct);
+  };
+
+  selectProductHandler = product => {
+    this.props.selectProduct(product);
   };
 
   render() {
     const { products } = this.props;
-    return <Products products={products} addProductHandler={this.addProductHandler} />;
+    return (
+      <Products
+        products={products}
+        addProductHandler={this.addProductHandler}
+        selectProductHandler={this.selectProductHandler}
+      />
+    );
   }
 }
 
@@ -20,7 +31,8 @@ const mapStateToProps = ({ products }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addProduct: id => dispatch(addProduct(id))
+    addProduct: product => dispatch(addProduct(product)),
+    selectProduct: id => dispatch(selectProduct(id))
   };
 };
 
