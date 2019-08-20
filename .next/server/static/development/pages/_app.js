@@ -97,18 +97,54 @@ module.exports =
 /*!********************************!*\
   !*** ./app/actions/actions.js ***!
   \********************************/
-/*! exports provided: addProduct, incrementProduct, subtractProduct, deleteProduct, selectProduct */
+/*! exports provided: productsIsLoading, productsLoadingError, productsLoadingSuccess, fetchProducts, addProduct, incrementProduct, subtractProduct, deleteProduct, selectProduct */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productsIsLoading", function() { return productsIsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productsLoadingError", function() { return productsLoadingError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productsLoadingSuccess", function() { return productsLoadingSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProducts", function() { return fetchProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addProduct", function() { return addProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "incrementProduct", function() { return incrementProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subtractProduct", function() { return subtractProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProduct", function() { return deleteProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectProduct", function() { return selectProduct; });
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 
+
+const productsIsLoading = bool => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__["PRODUCTS_IS_LOADING"],
+    payload: bool
+  };
+};
+const productsLoadingError = bool => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__["PRODUCTS_LOADING_ERROR"],
+    payload: bool
+  };
+};
+const productsLoadingSuccess = products => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__["PRODUCTS_LOADING_SUCCESS"],
+    payload: products
+  };
+};
+const fetchProducts = url => dispatch => {
+  dispatch(productsIsLoading(true));
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).catch(err => {
+    dispatch(productsIsLoading(false));
+    dispatch(productsLoadingError(err.message));
+    dispatch(productsLoadingSuccess([]));
+  }).then(data => {
+    dispatch(productsIsLoading(false));
+    dispatch(productsLoadingSuccess(data.data));
+  });
+};
 const addProduct = product => {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["ADD_PRODUCT"],
@@ -212,39 +248,22 @@ const basketReducer = (state = [], action) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/actions */ "./app/actions/actions.js");
-/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _actions_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/actions */ "./app/actions/actions.js");
+/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
 
 
-const initialState = [{
-  title: 'Product 1',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  price: '128',
-  id: '15'
-}, {
-  title: 'Product 2',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  price: '9',
-  id: '26'
-}, {
-  title: 'Product 3',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  price: '146',
-  id: '23'
-}, {
-  title: 'Product 4',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  price: '256',
-  id: '74'
-}, {
-  title: 'Product 5',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  price: '28',
-  id: '89'
-}];
 
-const productsReducer = (state = initialState, action) => {
+
+const productsReducer = (state = {}, action) => {
   switch (action.type) {
+    case _types_types__WEBPACK_IMPORTED_MODULE_2__["PRODUCTS_LOADING_SUCCESS"]:
+      const products = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(action.payload).map(i => action.payload[i]);
+
+      console.log(products);
+      return products;
+
     default:
       return state;
   }
@@ -324,11 +343,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "redux-devtools-extension");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _reducers_rootReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reducers/rootReducer */ "./app/reducers/rootReducer.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-thunk */ "redux-thunk");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_thunk__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
 function initializeStore() {
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_2__["rootReducer"], Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])()));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_rootReducer__WEBPACK_IMPORTED_MODULE_2__["rootReducer"], Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_3___default.a)));
 }
 
 /***/ }),
@@ -337,21 +359,27 @@ function initializeStore() {
 /*!****************************!*\
   !*** ./app/types/types.js ***!
   \****************************/
-/*! exports provided: ADD_PRODUCT, INCREMENT_PRODUCT, SUBTRACT_PRODUCT, DELETE_PRODUCT, SELECT_PRODUCT */
+/*! exports provided: PRODUCTS_IS_LOADING, PRODUCTS_LOADING_ERROR, PRODUCTS_LOADING_SUCCESS, INCREMENT_PRODUCT, SUBTRACT_PRODUCT, DELETE_PRODUCT, SELECT_PRODUCT, ADD_PRODUCT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_PRODUCT", function() { return ADD_PRODUCT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PRODUCTS_IS_LOADING", function() { return PRODUCTS_IS_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PRODUCTS_LOADING_ERROR", function() { return PRODUCTS_LOADING_ERROR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PRODUCTS_LOADING_SUCCESS", function() { return PRODUCTS_LOADING_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_PRODUCT", function() { return INCREMENT_PRODUCT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUBTRACT_PRODUCT", function() { return SUBTRACT_PRODUCT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_PRODUCT", function() { return DELETE_PRODUCT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECT_PRODUCT", function() { return SELECT_PRODUCT; });
-const ADD_PRODUCT = 'ADD_PRODUCT';
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_PRODUCT", function() { return ADD_PRODUCT; });
+const PRODUCTS_IS_LOADING = 'PRODUCTS_IS_LOADING';
+const PRODUCTS_LOADING_ERROR = 'PRODUCTS_LOADING_ERROR';
+const PRODUCTS_LOADING_SUCCESS = 'PRODUCTS_LOADING_SUCCESS';
 const INCREMENT_PRODUCT = 'INCREMENT_PRODUCT';
 const SUBTRACT_PRODUCT = 'SUBTRACT_PRODUCT';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const SELECT_PRODUCT = 'SELECT_PRODUCT';
+const ADD_PRODUCT = 'ADD_PRODUCT';
 
 /***/ }),
 
@@ -371,10 +399,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/store/store */ "./app/store/store.js");
 
 
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\lib\\with-redux-store.js";
+var _jsxFileName = "/home/user/Desktop/rabcheniuk/nextJS-shopping-cart/lib/with-redux-store.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
-const isServer = "undefined" === 'undefined';
+const isServer = true;
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
 function getOrCreateStore(initialState) {
@@ -411,7 +440,7 @@ function getOrCreateStore(initialState) {
     }
 
     render() {
-      return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(App, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
+      return __jsx(App, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props, {
         reduxStore: this.reduxStore,
         __source: {
           fileName: _jsxFileName,
@@ -797,8 +826,7 @@ const singletonRouter = {
 
 }; // Create public properties and methods of the router in the singletonRouter
 
-const urlPropertyFields = ['pathname', 'route', 'query', 'asPath'];
-const propertyFields = ['components'];
+const urlPropertyFields = ['pathname', 'route', 'query', 'asPath', 'components'];
 const routerEvents = ['routeChangeStart', 'beforeHistoryChange', 'routeChangeComplete', 'routeChangeError', 'hashChangeStart', 'hashChangeComplete'];
 const coreMethodFields = ['push', 'replace', 'reload', 'back', 'prefetch', 'beforePopState']; // Events is a static property on the router, the router doesn't have to be initialized to use it
 
@@ -808,7 +836,7 @@ const coreMethodFields = ['push', 'replace', 'reload', 'back', 'prefetch', 'befo
   }
 
 });
-propertyFields.concat(urlPropertyFields).forEach(field => {
+urlPropertyFields.forEach(field => {
   // Here we need to use Object.defineProperty because, we need to return
   // the property assigned to the actual router
   // The value might get changed as we change routes and this is the
@@ -904,18 +932,6 @@ function makePublicRouterInstance(router) {
 
 
   instance.events = _router2.default.events;
-  propertyFields.forEach(field => {
-    // Here we need to use Object.defineProperty because, we need to return
-    // the property assigned to the actual router
-    // The value might get changed as we change routes and this is the
-    // proper way to access it
-    (0, _defineProperty.default)(instance, field, {
-      get() {
-        return _router[field];
-      }
-
-    });
-  });
   coreMethodFields.forEach(field => {
     instance[field] = function () {
       return _router[field](...arguments);
@@ -1054,9 +1070,9 @@ class App extends _react.default.Component {
       pageProps
     } = this.props;
     const url = createUrl(router);
-    return _react.default.createElement(Container, null, _react.default.createElement(Component, (0, _extends2.default)({}, pageProps, {
+    return _react.default.createElement(Component, (0, _extends2.default)({}, pageProps, {
       url: url
-    })));
+    }));
   }
 
 } // @deprecated noop for now until removal
@@ -1149,7 +1165,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "react-redux");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_redux__WEBPACK_IMPORTED_MODULE_4__);
 
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\pages\\_app.js";
+var _jsxFileName = "/home/user/Desktop/rabcheniuk/nextJS-shopping-cart/pages/_app.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
@@ -1162,14 +1179,14 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
       pageProps,
       reduxStore
     } = this.props;
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
+    return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_4__["Provider"], {
       store: reduxStore,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 10
       },
       __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+    }, __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 11
@@ -1193,6 +1210,17 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_1___default.a {
 
 module.exports = __webpack_require__(/*! private-next-pages/_app.js */"./pages/_app.js");
 
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
@@ -1347,6 +1375,17 @@ module.exports = require("redux");
 /***/ (function(module, exports) {
 
 module.exports = require("redux-devtools-extension");
+
+/***/ }),
+
+/***/ "redux-thunk":
+/*!******************************!*\
+  !*** external "redux-thunk" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
 
 /***/ })
 

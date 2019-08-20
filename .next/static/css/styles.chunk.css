@@ -68,33 +68,5 @@ a {
     background: #5ac18e;
     font-weight: bold; }
 
-.basket-item {
-  padding: 10px 0; }
-  .basket-item__description {
-    padding: 5px 0; }
-  .basket-item__quantity {
-    padding: 5px 0; }
-  .basket-item__btn {
-    color: #fff;
-    background: #5ac18e;
-    font-weight: bold;
-    margin-right: 10px; }
-    .basket-item__btn--quantity {
-      padding: 5px 20px; }
-
-.basket {
-  padding: 10px 15px; }
-
-.single-product {
-  padding: 25px 15px; }
-  .single-product__description {
-    padding: 5px 0; }
-  .single-product__price {
-    margin-bottom: 10px; }
-  .single-product__btn {
-    color: #fff;
-    background: #5ac18e;
-    font-weight: bold; }
-
 
 /*# sourceMappingURL=styles.chunk.css.map*/

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Products from '../Products/Products';
-import { addProduct, selectProduct } from '../../actions/actions';
+import { addProduct, selectProduct,fetchProducts } from '../../actions/actions';
 import './Products.scss';
 
 class ProductsContainer extends Component {
@@ -13,6 +13,10 @@ class ProductsContainer extends Component {
   selectProductHandler = product => {
     this.props.selectProduct(product);
   };
+
+  componentDidMount() {
+    this.props.fetchProducts("http://192.168.88.72:8081/api/product")
+  }
 
   render() {
     const { products } = this.props;
@@ -33,7 +37,8 @@ const mapStateToProps = ({ products }) => {
 const mapDispatchToProps = dispatch => {
   return {
     addProduct: product => dispatch(addProduct(product)),
-    selectProduct: id => dispatch(selectProduct(id))
+    selectProduct: id => dispatch(selectProduct(id)),
+    fetchProducts: (url) => dispatch(fetchProducts(url))
   };
 };
 

@@ -3,6 +3,7 @@ import Product from './Product/Product';
 import '../../styles/styles.scss';
 
 const Products = ({ products, addProductHandler, selectProductHandler }) => {
+  console.log(products)
   return (
     <div className='products'>
       {products.map(product => {

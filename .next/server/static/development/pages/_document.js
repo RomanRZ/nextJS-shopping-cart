@@ -466,7 +466,7 @@ Document.childContextTypes = {
   _documentProps: _propTypes.default.any,
   _devOnlyInvalidateCacheQueryString: _propTypes.default.string
   /**
-  * `getInitialProps` hook returns the context object with the addition of `renderPage`. `
+  * `getInitialProps` hook returns the context object with the addition of `renderPage`.
   * `renderPage` callback executes `React` rendering logic synchronously to support server-rendering wrappers
   */
 
@@ -897,7 +897,7 @@ class NextScript extends _react.Component {
 
     const pageScript = [_react.default.createElement("script", (0, _extends2.default)({
       async: true,
-      id: "__NEXT_PAGE__" + page,
+      "data-next-page": page,
       key: page,
       src: assetPrefix + (dynamicBuildId ? "/_next/static/client/pages" + getPageFile(page, buildId) : "/_next/static/" + buildId + "/pages" + getPageFile(page)) + _devOnlyInvalidateCacheQueryString,
       nonce: this.props.nonce,
@@ -905,7 +905,7 @@ class NextScript extends _react.Component {
     },  false ? undefined : {})),  false && false];
     const appScript = [_react.default.createElement("script", (0, _extends2.default)({
       async: true,
-      id: "__NEXT_PAGE__/_app",
+      "data-next-page": "/_app",
       src: assetPrefix + (dynamicBuildId ? "/_next/static/client/pages/_app." + buildId + ".js" : "/_next/static/" + buildId + "/pages/_app.js") + _devOnlyInvalidateCacheQueryString,
       key: "_app",
       nonce: this.props.nonce,

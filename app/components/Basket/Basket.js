@@ -1,5 +1,6 @@
 import React from 'react';
 import BasketItem from './BasketItem/BasketItem';
+import BasketForm from './BasketForm/BasketFormContainer';
 import './Basket.scss';
 
 const Basket = ({ basket, incrementProductHandler, subtractProductHandler, deleteProductHandler }) => {
@@ -9,6 +10,7 @@ const Basket = ({ basket, incrementProductHandler, subtractProductHandler, delet
 
   return (
     <div className='basket'>
+      <BasketForm/>
       {basket.map(({ title, description, price, id, quantity }) => {
         return (
           <BasketItem

@@ -97,18 +97,54 @@ module.exports =
 /*!********************************!*\
   !*** ./app/actions/actions.js ***!
   \********************************/
-/*! exports provided: addProduct, incrementProduct, subtractProduct, deleteProduct, selectProduct */
+/*! exports provided: productsIsLoading, productsLoadingError, productsLoadingSuccess, fetchProducts, addProduct, incrementProduct, subtractProduct, deleteProduct, selectProduct */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productsIsLoading", function() { return productsIsLoading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productsLoadingError", function() { return productsLoadingError; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "productsLoadingSuccess", function() { return productsLoadingSuccess; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchProducts", function() { return fetchProducts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addProduct", function() { return addProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "incrementProduct", function() { return incrementProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subtractProduct", function() { return subtractProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProduct", function() { return deleteProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "selectProduct", function() { return selectProduct; });
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/types/types.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 
+
+const productsIsLoading = bool => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__["PRODUCTS_IS_LOADING"],
+    payload: bool
+  };
+};
+const productsLoadingError = bool => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__["PRODUCTS_LOADING_ERROR"],
+    payload: bool
+  };
+};
+const productsLoadingSuccess = products => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__["PRODUCTS_LOADING_SUCCESS"],
+    payload: products
+  };
+};
+const fetchProducts = url => dispatch => {
+  dispatch(productsIsLoading(true));
+  return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get(url).catch(err => {
+    dispatch(productsIsLoading(false));
+    dispatch(productsLoadingError(err.message));
+    dispatch(productsLoadingSuccess([]));
+  }).then(data => {
+    dispatch(productsIsLoading(false));
+    dispatch(productsLoadingSuccess(data.data));
+  });
+};
 const addProduct = product => {
   return {
     type: _types_types__WEBPACK_IMPORTED_MODULE_0__["ADD_PRODUCT"],
@@ -157,62 +193,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Navbar_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Navbar.scss */ "./app/components/Navbar/Navbar.scss");
 /* harmony import */ var _Navbar_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Navbar_scss__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Navbar\\Navbar.js";
+var _jsxFileName = "/home/user/Desktop/rabcheniuk/nextJS-shopping-cart/app/components/Navbar/Navbar.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
 const Navbar = () => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+  return __jsx("nav", {
     className: "nav",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 7
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+  }, __jsx("ul", {
     className: "nav__list",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, __jsx("li", {
     className: "nav__item",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, __jsx("a", {
     className: "nav__link",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 11
     },
     __self: undefined
-  }, "Products"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+  }, "Products"))), __jsx("li", {
     className: "nav__item",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 14
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/basket",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 15
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, __jsx("a", {
     className: "nav__link",
     __source: {
       fileName: _jsxFileName,
@@ -252,7 +289,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Product_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Product.scss */ "./app/components/Products/Product/Product.scss");
 /* harmony import */ var _Product_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Product_scss__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Products\\Product\\Product.js";
+var _jsxFileName = "/home/user/Desktop/rabcheniuk/nextJS-shopping-cart/app/components/Products/Product/Product.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -262,35 +300,35 @@ const Product = ({
   description,
   price
 }) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+  return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/selectedProduct",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 7
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, __jsx("div", {
     className: "product",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 8
     },
     __self: undefined
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+  }, __jsx("h3", {
     className: "product__title",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 9
     },
     __self: undefined
-  }, title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, title), __jsx("div", {
     className: "product__description",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 10
     },
     __self: undefined
-  }, description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+  }, description), __jsx("h4", {
     className: "product__price",
     __source: {
       fileName: _jsxFileName,
@@ -329,7 +367,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Product_Product__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Product/Product */ "./app/components/Products/Product/Product.js");
 /* harmony import */ var _styles_styles_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../styles/styles.scss */ "./app/styles/styles.scss");
 /* harmony import */ var _styles_styles_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_styles_styles_scss__WEBPACK_IMPORTED_MODULE_2__);
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Products\\Products.js";
+var _jsxFileName = "/home/user/Desktop/rabcheniuk/nextJS-shopping-cart/app/components/Products/Products.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
@@ -339,11 +378,12 @@ const Products = ({
   addProductHandler,
   selectProductHandler
 }) => {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  console.log(products);
+  return __jsx("div", {
     className: "products",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 7
+      lineNumber: 8
     },
     __self: undefined
   }, products.map(product => {
@@ -353,30 +393,30 @@ const Products = ({
       price,
       id
     } = product;
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    return __jsx("div", {
       onClick: () => selectProductHandler(product),
       className: "products__item",
       key: id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 11
+        lineNumber: 12
       },
       __self: undefined
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Product_Product__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }, __jsx(_Product_Product__WEBPACK_IMPORTED_MODULE_1__["default"], {
       title: title,
       description: description,
       price: price,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 13
       },
       __self: undefined
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }), __jsx("button", {
       className: "products__btn btn",
       onClick: () => addProductHandler(product),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 14
       },
       __self: undefined
     }, "Add product"));
@@ -419,7 +459,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Products_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Products_scss__WEBPACK_IMPORTED_MODULE_6__);
 
 
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\app\\components\\Products\\ProductsContainer.js";
+var _jsxFileName = "/home/user/Desktop/rabcheniuk/nextJS-shopping-cart/app/components/Products/ProductsContainer.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
 
 
 
@@ -443,17 +484,21 @@ class ProductsContainer extends react__WEBPACK_IMPORTED_MODULE_2__["Component"] 
     });
   }
 
+  componentDidMount() {
+    this.props.fetchProducts("http://192.168.88.72:8081/api/product");
+  }
+
   render() {
     const {
       products
     } = this.props;
-    return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Products_Products__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return __jsx(_Products_Products__WEBPACK_IMPORTED_MODULE_4__["default"], {
       products: products,
       addProductHandler: this.addProductHandler,
       selectProductHandler: this.selectProductHandler,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 20
+        lineNumber: 24
       },
       __self: this
     });
@@ -472,7 +517,8 @@ const mapStateToProps = ({
 const mapDispatchToProps = dispatch => {
   return {
     addProduct: product => dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_5__["addProduct"])(product)),
-    selectProduct: id => dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_5__["selectProduct"])(id))
+    selectProduct: id => dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_5__["selectProduct"])(id)),
+    fetchProducts: url => dispatch(Object(_actions_actions__WEBPACK_IMPORTED_MODULE_5__["fetchProducts"])(url))
   };
 };
 
@@ -495,21 +541,27 @@ const mapDispatchToProps = dispatch => {
 /*!****************************!*\
   !*** ./app/types/types.js ***!
   \****************************/
-/*! exports provided: ADD_PRODUCT, INCREMENT_PRODUCT, SUBTRACT_PRODUCT, DELETE_PRODUCT, SELECT_PRODUCT */
+/*! exports provided: PRODUCTS_IS_LOADING, PRODUCTS_LOADING_ERROR, PRODUCTS_LOADING_SUCCESS, INCREMENT_PRODUCT, SUBTRACT_PRODUCT, DELETE_PRODUCT, SELECT_PRODUCT, ADD_PRODUCT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_PRODUCT", function() { return ADD_PRODUCT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PRODUCTS_IS_LOADING", function() { return PRODUCTS_IS_LOADING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PRODUCTS_LOADING_ERROR", function() { return PRODUCTS_LOADING_ERROR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PRODUCTS_LOADING_SUCCESS", function() { return PRODUCTS_LOADING_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INCREMENT_PRODUCT", function() { return INCREMENT_PRODUCT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SUBTRACT_PRODUCT", function() { return SUBTRACT_PRODUCT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DELETE_PRODUCT", function() { return DELETE_PRODUCT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SELECT_PRODUCT", function() { return SELECT_PRODUCT; });
-const ADD_PRODUCT = 'ADD_PRODUCT';
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_PRODUCT", function() { return ADD_PRODUCT; });
+const PRODUCTS_IS_LOADING = 'PRODUCTS_IS_LOADING';
+const PRODUCTS_LOADING_ERROR = 'PRODUCTS_LOADING_ERROR';
+const PRODUCTS_LOADING_SUCCESS = 'PRODUCTS_LOADING_SUCCESS';
 const INCREMENT_PRODUCT = 'INCREMENT_PRODUCT';
 const SUBTRACT_PRODUCT = 'SUBTRACT_PRODUCT';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const SELECT_PRODUCT = 'SELECT_PRODUCT';
+const ADD_PRODUCT = 'ADD_PRODUCT';
 
 /***/ }),
 
@@ -802,7 +854,7 @@ function formatUrl(url) {
 
 let observer;
 const listeners = new _map.default();
-const IntersectionObserver =  false ? undefined : null;
+const IntersectionObserver = false ? undefined : null;
 
 function getObserver() {
   // Return shared instance of IntersectionObserver if already created
@@ -850,8 +902,9 @@ const listenToIntersections = (el, cb) => {
 };
 
 class Link extends _react.Component {
-  constructor() {
-    super(...arguments);
+  constructor(props) {
+    super(props);
+    this.p = void 0;
 
     this.cleanUpListeners = () => {};
 
@@ -880,7 +933,7 @@ class Link extends _react.Component {
       } = this.formatUrls(this.props.href, this.props.as);
 
       if (!isLocal(href)) {
-        // ignore click if it's outside our scope
+        // ignore click if it's outside our scope (e.g. https://google.com)
         return;
       }
 
@@ -911,6 +964,14 @@ class Link extends _react.Component {
         }
       });
     };
+
+    if (true) {
+      if (props.prefetch) {
+        console.warn('Next.js auto-prefetches automatically based on viewport. The prefetch attribute is no longer needed. More: https://err.sh/zeit/next.js/prefetch-true-deprecated');
+      }
+    }
+
+    this.p = props.prefetch !== false;
   }
 
   componentWillUnmount() {
@@ -918,7 +979,7 @@ class Link extends _react.Component {
   }
 
   handleRef(ref) {
-    if (this.props.prefetch && IntersectionObserver && ref && ref.tagName) {
+    if (this.p && IntersectionObserver && ref && ref.tagName) {
       this.cleanUpListeners();
       this.cleanUpListeners = listenToIntersections(ref, () => {
         this.prefetch();
@@ -929,7 +990,7 @@ class Link extends _react.Component {
 
 
   prefetch() {
-    if (!this.props.prefetch || "undefined" === 'undefined') return; // Prefetch the JSON page if asked (only in the client)
+    if (!this.p || true) return; // Prefetch the JSON page if asked (only in the client)
 
     const {
       pathname
@@ -949,7 +1010,7 @@ class Link extends _react.Component {
     const {
       href,
       as
-    } = this.formatUrls(this.props.href, this.props.as); // Deprecated. Warning shown by propType check. If the childen provided is a string (<Link>example</Link>) we wrap it in an <a> tag
+    } = this.formatUrls(this.props.href, this.props.as); // Deprecated. Warning shown by propType check. If the children provided is a string (<Link>example</Link>) we wrap it in an <a> tag
 
     if (typeof children === 'string') {
       children = _react.default.createElement("a", null, children);
@@ -959,7 +1020,15 @@ class Link extends _react.Component {
     const child = _react.Children.only(children);
 
     const props = {
-      ref: el => this.handleRef(el),
+      ref: el => {
+        this.handleRef(el);
+
+        if (child && typeof child === 'object' && child.ref) {
+          if (typeof child.ref === 'function') child.ref(el);else if (typeof child.ref === 'object') {
+            child.ref.current = el;
+          }
+        }
+      },
       onMouseEnter: e => {
         if (child.props && typeof child.props.onMouseEnter === 'function') {
           child.props.onMouseEnter(e);
@@ -994,9 +1063,6 @@ class Link extends _react.Component {
 }
 
 Link.propTypes = void 0;
-Link.defaultProps = {
-  prefetch: true
-};
 
 if (true) {
   const warn = (0, _utils.execOnce)(console.error); // This module gets removed by webpack.IgnorePlugin
@@ -1078,8 +1144,7 @@ const singletonRouter = {
 
 }; // Create public properties and methods of the router in the singletonRouter
 
-const urlPropertyFields = ['pathname', 'route', 'query', 'asPath'];
-const propertyFields = ['components'];
+const urlPropertyFields = ['pathname', 'route', 'query', 'asPath', 'components'];
 const routerEvents = ['routeChangeStart', 'beforeHistoryChange', 'routeChangeComplete', 'routeChangeError', 'hashChangeStart', 'hashChangeComplete'];
 const coreMethodFields = ['push', 'replace', 'reload', 'back', 'prefetch', 'beforePopState']; // Events is a static property on the router, the router doesn't have to be initialized to use it
 
@@ -1089,7 +1154,7 @@ const coreMethodFields = ['push', 'replace', 'reload', 'back', 'prefetch', 'befo
   }
 
 });
-propertyFields.concat(urlPropertyFields).forEach(field => {
+urlPropertyFields.forEach(field => {
   // Here we need to use Object.defineProperty because, we need to return
   // the property assigned to the actual router
   // The value might get changed as we change routes and this is the
@@ -1185,18 +1250,6 @@ function makePublicRouterInstance(router) {
 
 
   instance.events = _router2.default.events;
-  propertyFields.forEach(field => {
-    // Here we need to use Object.defineProperty because, we need to return
-    // the property assigned to the actual router
-    // The value might get changed as we change routes and this is the
-    // proper way to access it
-    (0, _defineProperty.default)(instance, field, {
-      get() {
-        return _router[field];
-      }
-
-    });
-  });
   coreMethodFields.forEach(field => {
     instance[field] = function () {
       return _router[field](...arguments);
@@ -1288,20 +1341,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_Products_ProductsContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app/components/Products/ProductsContainer */ "./app/components/Products/ProductsContainer.js");
 /* harmony import */ var _app_styles_styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/styles/styles.scss */ "./app/styles/styles.scss");
 /* harmony import */ var _app_styles_styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_app_styles_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
-var _jsxFileName = "F:\\Programming\\TEST-TASKS\\theadmasters\\admasters\\pages\\index.js";
+var _jsxFileName = "/home/user/Desktop/rabcheniuk/nextJS-shopping-cart/pages/index.js";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
 class index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   render() {
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_components_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_app_components_Navbar_Navbar__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 10
       },
       __self: this
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_app_components_Products_ProductsContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }), __jsx(_app_components_Products_ProductsContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
       __source: {
         fileName: _jsxFileName,
         lineNumber: 11
@@ -1321,8 +1375,19 @@ class index extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\Programming\TEST-TASKS\theadmasters\admasters\pages\index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! /home/user/Desktop/rabcheniuk/nextJS-shopping-cart/pages/index.js */"./pages/index.js");
 
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 
